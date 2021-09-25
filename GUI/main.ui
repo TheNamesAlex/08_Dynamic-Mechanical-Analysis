@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1343</width>
-    <height>807</height>
+    <width>1352</width>
+    <height>809</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -69,6 +69,9 @@
     </property>
    </widget>
    <widget class="QTextEdit" name="forceColumn">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>30</x>
@@ -79,6 +82,9 @@
     </property>
    </widget>
    <widget class="QTextEdit" name="displacementColumn">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>30</x>
@@ -89,6 +95,9 @@
     </property>
    </widget>
    <widget class="QLabel" name="label">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>30</x>
@@ -102,6 +111,9 @@
     </property>
    </widget>
    <widget class="QLabel" name="label_2">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>30</x>
@@ -117,14 +129,27 @@
    <widget class="QPushButton" name="printRawData">
     <property name="geometry">
      <rect>
-      <x>240</x>
-      <y>340</y>
-      <width>251</width>
-      <height>91</height>
+      <x>480</x>
+      <y>320</y>
+      <width>221</width>
+      <height>111</height>
      </rect>
     </property>
     <property name="text">
-     <string>Print Raw Data</string>
+     <string>Plot Data</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="printNormalizedData">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>320</y>
+      <width>221</width>
+      <height>111</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Plot Normalized Data</string>
     </property>
    </widget>
   </widget>
@@ -133,7 +158,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1343</width>
+     <width>1352</width>
      <height>21</height>
     </rect>
    </property>

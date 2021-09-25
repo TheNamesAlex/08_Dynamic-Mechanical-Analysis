@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a676e339-93d0-47b0-9414-499eb1da997f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo.py" beforeDir="false" afterPath="$PROJECT_DIR$/demo.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.ui" beforeDir="false" afterPath="$PROJECT_DIR$/main.ui" afterDir="false" />
     </list>
@@ -16,13 +17,16 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/demo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="475">
-              <caret line="123" lean-forward="true" selection-start-line="123" selection-end-line="123" />
+            <state relative-caret-position="344">
+              <caret line="121" column="55" lean-forward="true" selection-start-line="121" selection-start-column="55" selection-end-line="121" selection-end-column="55" />
               <folding>
                 <element signature="e#0#47#0" expanded="true" />
-                <element signature="e#905#965#0" />
-                <element signature="e#2383#2822#0" />
-                <element signature="e#2871#3320#0" />
+                <element signature="e#1294#1352#0" />
+                <element signature="e#2243#2663#0" />
+                <element signature="e#3014#3361#0" />
+                <element signature="e#2610#2938#0" />
+                <element signature="e#3576#4704#0" />
+                <element signature="e#5803#6190#0" />
               </folding>
             </state>
           </provider>
@@ -91,6 +95,7 @@
       <find>filepath</find>
       <find>connect</find>
       <find>filese</find>
+      <find>#INDICES</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -206,13 +211,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="1626" height="1047" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.39924434" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32932165" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32932165" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39934355" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -226,27 +232,19 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/demo.py</url>
-          <line>90</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/demo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="123" lean-forward="true" selection-start-line="123" selection-end-line="123" />
+        <state relative-caret-position="344">
+          <caret line="121" column="55" lean-forward="true" selection-start-line="121" selection-start-column="55" selection-end-line="121" selection-end-column="55" />
           <folding>
             <element signature="e#0#47#0" expanded="true" />
-            <element signature="e#905#965#0" />
-            <element signature="e#2383#2822#0" />
-            <element signature="e#2871#3320#0" />
+            <element signature="e#1294#1352#0" />
+            <element signature="e#2243#2663#0" />
+            <element signature="e#3014#3361#0" />
+            <element signature="e#2610#2938#0" />
+            <element signature="e#3576#4704#0" />
+            <element signature="e#5803#6190#0" />
           </folding>
         </state>
       </provider>

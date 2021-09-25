@@ -17,10 +17,10 @@
    <widget class="PlotWidget" name="graphWidget" native="true">
     <property name="geometry">
      <rect>
-      <x>720</x>
+      <x>480</x>
       <y>30</y>
-      <width>591</width>
-      <height>271</height>
+      <width>851</width>
+      <height>621</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -46,9 +46,9 @@
    <widget class="QTableView" name="tableView">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>20</x>
       <y>30</y>
-      <width>671</width>
+      <width>451</width>
       <height>271</height>
      </rect>
     </property>
@@ -68,35 +68,35 @@
      <enum>QAbstractScrollArea::AdjustIgnored</enum>
     </property>
    </widget>
-   <widget class="QTextEdit" name="forceColumn">
+   <widget class="QTextEdit" name="startIndex">
     <property name="enabled">
-     <bool>false</bool>
+     <bool>true</bool>
     </property>
     <property name="geometry">
      <rect>
       <x>30</x>
       <y>340</y>
-      <width>161</width>
+      <width>61</width>
       <height>31</height>
      </rect>
     </property>
    </widget>
-   <widget class="QTextEdit" name="displacementColumn">
+   <widget class="QTextEdit" name="endIndex">
     <property name="enabled">
-     <bool>false</bool>
+     <bool>true</bool>
     </property>
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>400</y>
-      <width>161</width>
+      <x>100</x>
+      <y>340</y>
+      <width>61</width>
       <height>31</height>
      </rect>
     </property>
    </widget>
    <widget class="QLabel" name="label">
     <property name="enabled">
-     <bool>false</bool>
+     <bool>true</bool>
     </property>
     <property name="geometry">
      <rect>
@@ -107,51 +107,498 @@
      </rect>
     </property>
     <property name="text">
-     <string>Type in force column # (e.g. 5)</string>
+     <string>Start Index</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_2">
     <property name="enabled">
-     <bool>false</bool>
+     <bool>true</bool>
     </property>
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>380</y>
-      <width>221</width>
+      <x>100</x>
+      <y>320</y>
+      <width>71</width>
       <height>16</height>
      </rect>
     </property>
     <property name="text">
-     <string>Type in displacement column # (e.g. 3)</string>
+     <string>End Index</string>
     </property>
    </widget>
    <widget class="QPushButton" name="printRawData">
     <property name="geometry">
      <rect>
-      <x>480</x>
-      <y>320</y>
-      <width>221</width>
-      <height>111</height>
+      <x>170</x>
+      <y>340</y>
+      <width>291</width>
+      <height>91</height>
      </rect>
     </property>
     <property name="text">
      <string>Plot Data</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="printNormalizedData">
+   <widget class="QPushButton" name="button_Update">
     <property name="geometry">
      <rect>
-      <x>240</x>
-      <y>320</y>
-      <width>221</width>
-      <height>111</height>
+      <x>30</x>
+      <y>380</y>
+      <width>131</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="text">
-     <string>Plot Normalized Data</string>
+     <string>Update</string>
     </property>
    </widget>
+   <widget class="QGraphicsView" name="graphicsView">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>310</y>
+      <width>451</width>
+      <height>131</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QGraphicsView" name="graphicsView_2">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>450</y>
+      <width>451</width>
+      <height>201</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>460</y>
+      <width>161</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Filters</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>490</y>
+      <width>71</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Savitky-Golay</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>460</y>
+      <width>31</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Order</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>380</x>
+      <y>460</y>
+      <width>81</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Window length</string>
+    </property>
+   </widget>
+   <widget class="QSlider" name="savitzkyOrder">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>490</y>
+      <width>121</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="minimum">
+     <number>1</number>
+    </property>
+    <property name="maximum">
+     <number>11</number>
+    </property>
+    <property name="singleStep">
+     <number>1</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+    <property name="tickPosition">
+     <enum>QSlider::TicksBelow</enum>
+    </property>
+    <property name="tickInterval">
+     <number>2</number>
+    </property>
+   </widget>
+   <widget class="QSlider" name="savitzkyLength">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>490</y>
+      <width>141</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="minimum">
+     <number>3</number>
+    </property>
+    <property name="maximum">
+     <number>31</number>
+    </property>
+    <property name="singleStep">
+     <number>2</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+    <property name="tickPosition">
+     <enum>QSlider::TicksBelow</enum>
+    </property>
+    <property name="tickInterval">
+     <number>4</number>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="savitzkyCheckbox">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>490</y>
+      <width>21</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_7">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>530</y>
+      <width>71</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>High-Pass</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="highpassCheckbox">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>530</y>
+      <width>21</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelSavitzkyOrder">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>480</y>
+      <width>47</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>ORDER</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelSavitzkyLength">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>480</y>
+      <width>47</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>LENGTH</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelHighpassCutoff">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>520</y>
+      <width>31</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Cutoff</string>
+    </property>
+   </widget>
+   <widget class="QSlider" name="highpassCutoff">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>530</y>
+      <width>271</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <number>10</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+    <property name="tickPosition">
+     <enum>QSlider::TicksBelow</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_8">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>570</y>
+      <width>71</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Detrend</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="detrendCheckbox">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>570</y>
+      <width>21</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="detrendBreakpointsLineEdit">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>570</y>
+      <width>251</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>0</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_9">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>570</y>
+      <width>71</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Breakpoints</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_10">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>590</y>
+      <width>251</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>All data = 0, otherwise comma separated &quot;0,100&quot;</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_11">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>610</y>
+      <width>131</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Asymmetric Least Squares</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="alsLineEdit">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>610</y>
+      <width>251</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>1000000, 0.01</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_12">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>630</y>
+      <width>251</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>10^2 ≤ λ ≤ 10^9,  0.001 ≤ p ≤ 0.1</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="alsCheckbox">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>610</y>
+      <width>21</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <zorder>graphicsView</zorder>
+   <zorder>graphWidget</zorder>
+   <zorder>selectData</zorder>
+   <zorder>tableView</zorder>
+   <zorder>startIndex</zorder>
+   <zorder>endIndex</zorder>
+   <zorder>label</zorder>
+   <zorder>label_2</zorder>
+   <zorder>printRawData</zorder>
+   <zorder>button_Update</zorder>
+   <zorder>graphicsView_2</zorder>
+   <zorder>label_3</zorder>
+   <zorder>label_4</zorder>
+   <zorder>label_5</zorder>
+   <zorder>label_6</zorder>
+   <zorder>savitzkyOrder</zorder>
+   <zorder>savitzkyLength</zorder>
+   <zorder>savitzkyCheckbox</zorder>
+   <zorder>label_7</zorder>
+   <zorder>highpassCheckbox</zorder>
+   <zorder>labelSavitzkyOrder</zorder>
+   <zorder>labelSavitzkyLength</zorder>
+   <zorder>labelHighpassCutoff</zorder>
+   <zorder>highpassCutoff</zorder>
+   <zorder>label_8</zorder>
+   <zorder>detrendCheckbox</zorder>
+   <zorder>detrendBreakpointsLineEdit</zorder>
+   <zorder>label_9</zorder>
+   <zorder>label_10</zorder>
+   <zorder>label_11</zorder>
+   <zorder>alsLineEdit</zorder>
+   <zorder>label_12</zorder>
+   <zorder>alsCheckbox</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

@@ -59,18 +59,29 @@ class MainWindow(QtWidgets.QMainWindow):
         self.alsCheckbox.stateChanged.connect(self.update_data)
         self.alsLineEdit.textChanged.connect(self.update_data)
 
-        #connecting the button to select some data
+        #connecting the button to select data
         self.selectData.clicked.connect(self.fileSelect)
-        self.button_Update.clicked.connect(self.update_data)
 
-        #connect "print raw data"-button to corresp. method
-        self.printRawData.clicked.connect(self.plot_data)
+        #connecting the button to update data, and clean and redraw figures
+        self.clearAndPlotData_button.clicked.connect(self.reset_indices)
+        self.clearAndPlotData_button.clicked.connect(self.update_data)
+        self.clearAndPlotData_button.clicked.connect(self.plot_data)
+
+    def reset_indices(self):
+        self.startIndex.setText('0')
+        self.endIndex.setText('99999')
 
     def clear_plot(self):
-        self.graphWidget.clear()
+        self.timeseriesgraphWidget.clear()
+        self.stressStraingraphWidget.clear()
+
         self.data_in_plot = False
 
     def update_data(self):
+
+        #update current filepath label
+        self.currentFilePathLabel.setText(self.filepath[self.filepath.rfind('/')+1:])
+
         # populate table after loading data
         self.names = ['Point', 'Time_Elapsed', 'Time_Scan', 'Displacement', 'Load', 'E11', 'E12', 'E22', 'Ax_cmd',
                       'Ax_err', 'No_Val']
@@ -116,6 +127,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.data['Load_filtered'] = self.data['Load_filtered']-self.baseline_als(self.data['Load_filtered'],
                                                                         parameters[0],
                                                                         parameters[1])
+
         if not self.initial_load:
 
             minIndex = int(self.startIndex.toPlainText())
@@ -149,10 +161,22 @@ class MainWindow(QtWidgets.QMainWindow):
         self.update_data()
 
     def plot_data(self):
+        #======================================================================
+        #parameters for legends
 
-        self.graphWidget.setTitle(self.filepath)
-        self.graphWidget.addLegend(pen=pg.mkPen(color=(0, 0, 0)),
-                                   brush=pg.mkBrush(color=(255, 255, 255)))
+        legendLabelTextColor = (0, 0, 0)
+        legendPen = pg.mkPen(color=(0, 0, 0))
+        legendBrush = pg.mkBrush(color=(255, 255, 255))
+
+        #======================================================================
+        # plot time series
+        self.timeseriesgraphWidget.setTitle('Time Series for Load [N] and Displacement [mm]')
+        self.timeseriesgraphWidget.addLegend(labelTextColot = legendLabelTextColor,
+                                             pen=legendPen,
+                                             brush=legendBrush)
+
+        self.timeseriesgraphWidget.setLabel('left', "Displacement (mm) and Load (N)")#, units='A')
+        self.timeseriesgraphWidget.setLabel('bottom', "Point (1)")#, units='A')
 
         pen1 = pg.mkPen(color=(255, 136, 0),
                         width=2,
@@ -175,9 +199,30 @@ class MainWindow(QtWidgets.QMainWindow):
         Displacement = self.data['Displacement'].values
         Index = self.data['Index'].values
 
-        self.graphWidget.plot(Index, Displacement, pen=pen1,name='Displacement')
-        self.graphWidget.plot(Index, Load, pen=pen2, name='Load')
-        self.graphWidget.plot(Index, Filtered, pen=penFiltered, name='Load Filtered')
+        self.timeseriesgraphWidget.plot(Index, Displacement, pen=pen1,name='Displacement [mm]')
+        self.timeseriesgraphWidget.plot(Index, Load, pen=pen2, name='Load [N]')
+        self.timeseriesgraphWidget.plot(Index, Filtered, pen=penFiltered, name='Load Filtered [N]')
+
+
+    # ======================================================================
+    # plot elliptical stress strain curve
+        # cant directly plot scatter into plotWidget. Maybe try with a brush passed into plotWidget?
+        self.stressStraingraphWidget.setTitle('Stress-Strain Data')
+
+        self.stressStraingraphWidget.addLegend(labelTextColot=legendLabelTextColor,
+                                               pen=legendPen,
+                                               brush=legendBrush)
+
+        self.stressStraingraphWidget.setLabel('left', "Load (N)")  # , units='A')
+        self.stressStraingraphWidget.setLabel('bottom', "Displacement (mm)")  # , units='A')
+
+        brushScatter = pg.mkBrush(color=(50, 50, 255, 100))
+        scatter = pg.ScatterPlotItem(size=5, brush=brushScatter, name='Stress-Strain Data')
+        scatter.addPoints(Displacement, Filtered)
+
+        self.stressStraingraphWidget.addItem(scatter)
+
+
 
         self.data_in_plot = True
 

@@ -17,16 +17,19 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/demo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="344">
-              <caret line="121" column="55" lean-forward="true" selection-start-line="121" selection-start-column="55" selection-end-line="121" selection-end-column="55" />
+            <state relative-caret-position="290">
+              <caret line="60" lean-forward="true" selection-start-line="60" selection-end-line="60" />
               <folding>
                 <element signature="e#0#47#0" expanded="true" />
-                <element signature="e#1294#1352#0" />
-                <element signature="e#2243#2663#0" />
-                <element signature="e#3014#3361#0" />
-                <element signature="e#2610#2938#0" />
-                <element signature="e#3576#4704#0" />
-                <element signature="e#5803#6190#0" />
+                <element signature="e#2135#2203#0" />
+                <element signature="e#2320#5081#0" />
+                <element signature="e#2850#3309#0" />
+                <element signature="e#3369#3730#0" />
+                <element signature="e#3790#3963#0" />
+                <element signature="e#4018#4373#0" />
+                <element signature="e#4422#4620#0" />
+                <element signature="e#4912#5240#0" />
+                <element signature="e#6377#6764#0" />
               </folding>
             </state>
           </provider>
@@ -96,6 +99,8 @@
       <find>connect</find>
       <find>filese</find>
       <find>#INDICES</find>
+      <find>graphWidget</find>
+      <find>timeseriesgraphWidget</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -131,7 +136,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -143,6 +147,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -211,14 +216,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="1626" height="1047" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.39924434" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.39924434" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32932165" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32932165" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32932165" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39934355" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -235,16 +239,19 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/demo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="344">
-          <caret line="121" column="55" lean-forward="true" selection-start-line="121" selection-start-column="55" selection-end-line="121" selection-end-column="55" />
+        <state relative-caret-position="290">
+          <caret line="60" lean-forward="true" selection-start-line="60" selection-end-line="60" />
           <folding>
             <element signature="e#0#47#0" expanded="true" />
-            <element signature="e#1294#1352#0" />
-            <element signature="e#2243#2663#0" />
-            <element signature="e#3014#3361#0" />
-            <element signature="e#2610#2938#0" />
-            <element signature="e#3576#4704#0" />
-            <element signature="e#5803#6190#0" />
+            <element signature="e#2135#2203#0" />
+            <element signature="e#2320#5081#0" />
+            <element signature="e#2850#3309#0" />
+            <element signature="e#3369#3730#0" />
+            <element signature="e#3790#3963#0" />
+            <element signature="e#4018#4373#0" />
+            <element signature="e#4422#4620#0" />
+            <element signature="e#4912#5240#0" />
+            <element signature="e#6377#6764#0" />
           </folding>
         </state>
       </provider>

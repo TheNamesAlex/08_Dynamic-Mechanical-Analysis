@@ -19,6 +19,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
     data_in_plot = False
     initial_load = True
+    FLAG_stress_strain = False
 
     def __init__(self, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
@@ -67,15 +68,64 @@ class MainWindow(QtWidgets.QMainWindow):
         self.clearAndPlotData_button.clicked.connect(self.update_data)
         self.clearAndPlotData_button.clicked.connect(self.plot_data)
 
+        #connecting button to convert displacement_load plot to stress_strain units
+        self.convertToStressStrainButton.clicked.connect(self.convertPlotToStressStrain)
+        self.convertToLoadDisplacement.clicked.connect(self.convertPlotToLoadDisplacement)
+
+    def convertPlotToLoadDisplacement(self):
+        self.clear_plot()
+        self.update_data()
+        self.FLAG_stress_strain = False
+        self.plot_data()
+
+    def convertPlotToStressStrain(self):
+        self.clear_plot()
+        self.update_data()
+        self.FLAG_stress_strain = True
+        #after adding data, update model and redraw plot
+        self.plot_data()
+
+        #calculate regression line for filtered data
+        self.calculate_regression_line_stress_strain()
+
+    def calculate_regression_line_stress_strain(self):
+        #x = Strain, y = Stress_N_msquared
+        y = self.data['Stress_N_msquared'].values
+        x = self.data['Strain'].values
+
+        #solve LLS Optimization problem min ||y - Phi*Theta||_2^2, Phi being [[1, x_0]^T,...,[1,x_N]^T]T
+        Phi = np.array([np.ones(len(self.data)),x]).T
+        self.Theta = np.linalg.inv(Phi.T @ Phi)@Phi.T @ y
+
+        #print young's modulus to boxes
+        self.youngsModulusTextEdit.setText(str(self.Theta[1]))
+
+        #draw regression line into lower plot
+        self.draw_regression_line()
+
+    def draw_regression_line(self):
+        x = self.data['Strain'].values
+        Phi = np.array([np.ones(len(self.data)),x]).T
+        y = Phi@self.Theta
+
+        brushScatter = pg.mkBrush(color=(255, 0, 0, 100))
+        scatter = pg.ScatterPlotItem(size=2, brush=brushScatter, name='Stress-Strain Data')
+        scatter.addPoints(x, y)
+        self.loadDisplacementWidget.addItem(scatter)
+
     def reset_indices(self):
         self.startIndex.setText('0')
         self.endIndex.setText('99999')
 
     def clear_plot(self):
         self.timeseriesgraphWidget.clear()
-        self.stressStraingraphWidget.clear()
+        self.loadDisplacementWidget.clear()
 
         self.data_in_plot = False
+
+    def update_model(self):
+        self.model = PandasModel(self.data)
+        self.tableView.setModel(self.model)
 
     def update_data(self):
 
@@ -95,6 +145,14 @@ class MainWindow(QtWidgets.QMainWindow):
         self.data['Index'] = [i for i in range(1, len(self.data) + 1)]
 
         self.data['Load_filtered'] = self.data.Load.values
+
+        if not self.initial_load:
+
+            minIndex = int(self.startIndex.toPlainText())
+            maxIndex = int(self.endIndex.toPlainText())
+
+            #truncate data to indices
+            self.data = self.data.iloc[minIndex:maxIndex]
 
         if self.savitzkyCheckbox.isChecked():
 
@@ -128,17 +186,15 @@ class MainWindow(QtWidgets.QMainWindow):
                                                                         parameters[0],
                                                                         parameters[1])
 
-        if not self.initial_load:
 
-            minIndex = int(self.startIndex.toPlainText())
-            maxIndex = int(self.endIndex.toPlainText())
 
-            #truncate data to indices
-            self.data = self.data.iloc[minIndex:maxIndex]
+        #add stress strain columns to data
+        self.height, self.width, self.length = [float(i) for i in self.heightWidthGaplengthLineEdit.text().split(',')]
+        self.data['Stress_N_msquared'] = 1e6 * self.data['Load_filtered'] / (self.height * self.width)
+        self.data['Strain'] = self.data['Displacement'] / self.length
 
         # print data to table
-        self.model = PandasModel(self.data)
-        self.tableView.setModel(self.model)
+        self.update_model()
 
         # after loading new data, clear the plot
         self.clear_plot()
@@ -147,7 +203,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.plot_data()
 
     def fileSelect(self):
-
+        self.FLAG_stress_strain = False
         #init filepath
         self.filepath = ''
 
@@ -169,14 +225,14 @@ class MainWindow(QtWidgets.QMainWindow):
         legendBrush = pg.mkBrush(color=(255, 255, 255))
 
         #======================================================================
-        # plot time series
+        # plot time series, due to small numerival values, displacement data is plotted in mm and not in m
         self.timeseriesgraphWidget.setTitle('Time Series for Load [N] and Displacement [mm]')
         self.timeseriesgraphWidget.addLegend(labelTextColot = legendLabelTextColor,
                                              pen=legendPen,
                                              brush=legendBrush)
 
-        self.timeseriesgraphWidget.setLabel('left', "Displacement (mm) and Load (N)")#, units='A')
-        self.timeseriesgraphWidget.setLabel('bottom', "Point (1)")#, units='A')
+        self.timeseriesgraphWidget.setLabel('left', "Displacement  [mm] and Load [N]")#, units='A')
+        self.timeseriesgraphWidget.setLabel('bottom', "Data Point [1]")#, units='A')
 
         pen1 = pg.mkPen(color=(255, 136, 0),
                         width=2,
@@ -207,20 +263,29 @@ class MainWindow(QtWidgets.QMainWindow):
     # ======================================================================
     # plot elliptical stress strain curve
         # cant directly plot scatter into plotWidget. Maybe try with a brush passed into plotWidget?
-        self.stressStraingraphWidget.setTitle('Stress-Strain Data')
+        label_left = ('left', "Load [N]")
+        label_bottom = ('bottom', "Displacement [mm]")
 
-        self.stressStraingraphWidget.addLegend(labelTextColot=legendLabelTextColor,
+        if self.FLAG_stress_strain:
+            Displacement = self.data['Strain']
+            Filtered = self.data['Stress_N_msquared']
+            label_left = ('left', "Stress [N/mm²]")
+            label_bottom = ('bottom', "Strain [1]")
+
+        self.loadDisplacementWidget.setTitle('Stress-Strain Data')
+
+        self.loadDisplacementWidget.addLegend(labelTextColot=legendLabelTextColor,
                                                pen=legendPen,
                                                brush=legendBrush)
 
-        self.stressStraingraphWidget.setLabel('left', "Load (N)")  # , units='A')
-        self.stressStraingraphWidget.setLabel('bottom', "Displacement (mm)")  # , units='A')
+        self.loadDisplacementWidget.setLabel(*label_left)  # , units='A')
+        self.loadDisplacementWidget.setLabel(*label_bottom)  # , units='A')
 
         brushScatter = pg.mkBrush(color=(50, 50, 255, 100))
         scatter = pg.ScatterPlotItem(size=5, brush=brushScatter, name='Stress-Strain Data')
         scatter.addPoints(Displacement, Filtered)
 
-        self.stressStraingraphWidget.addItem(scatter)
+        self.loadDisplacementWidget.addItem(scatter)
 
 
 

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1352</width>
-    <height>809</height>
+    <width>1192</width>
+    <height>725</height>
    </rect>
   </property>
   <property name="font">
@@ -25,7 +25,7 @@
      <rect>
       <x>480</x>
       <y>40</y>
-      <width>851</width>
+      <width>691</width>
       <height>331</height>
      </rect>
     </property>
@@ -39,10 +39,10 @@
    <widget class="QPushButton" name="selectData">
     <property name="geometry">
      <rect>
-      <x>1084</x>
-      <y>692</y>
-      <width>251</width>
-      <height>61</height>
+      <x>170</x>
+      <y>330</y>
+      <width>291</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="text">
@@ -136,9 +136,9 @@
     <property name="geometry">
      <rect>
       <x>170</x>
-      <y>350</y>
+      <y>390</y>
       <width>291</width>
-      <height>91</height>
+      <height>51</height>
      </rect>
     </property>
     <property name="text">
@@ -572,7 +572,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="PlotWidget" name="stressStraingraphWidget" native="true">
+   <widget class="PlotWidget" name="loadDisplacementWidget" native="true">
     <property name="geometry">
      <rect>
       <x>480</x>
@@ -614,6 +614,93 @@
      <string/>
     </property>
    </widget>
+   <widget class="QLineEdit" name="heightWidthGaplengthLineEdit">
+    <property name="geometry">
+     <rect>
+      <x>920</x>
+      <y>400</y>
+      <width>251</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>1,1,1</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="heightWidthGaplengthLabel">
+    <property name="geometry">
+     <rect>
+      <x>920</x>
+      <y>380</y>
+      <width>251</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Height, Width, Gap length [mm], e.g. &quot;1,3,10&quot;</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="convertToStressStrainButton">
+    <property name="geometry">
+     <rect>
+      <x>920</x>
+      <y>430</y>
+      <width>121</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Stress-Strain</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="convertToLoadDisplacement">
+    <property name="geometry">
+     <rect>
+      <x>1050</x>
+      <y>430</y>
+      <width>121</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Load-Displacement</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="youngsModulusTextEdit">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>920</x>
+      <y>500</y>
+      <width>81</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::RightToLeft</enum>
+    </property>
+    <property name="verticalScrollBarPolicy">
+     <enum>Qt::ScrollBarAlwaysOff</enum>
+    </property>
+    <property name="horizontalScrollBarPolicy">
+     <enum>Qt::ScrollBarAlwaysOff</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="heightWidthGaplengthLabel_2">
+    <property name="geometry">
+     <rect>
+      <x>1010</x>
+      <y>500</y>
+      <width>251</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Young's Modulus [N/mm²]</string>
+    </property>
+   </widget>
    <zorder>graphicsView</zorder>
    <zorder>timeseriesgraphWidget</zorder>
    <zorder>selectData</zorder>
@@ -647,19 +734,32 @@
    <zorder>alsLineEdit</zorder>
    <zorder>label_12</zorder>
    <zorder>alsCheckbox</zorder>
-   <zorder>stressStraingraphWidget</zorder>
+   <zorder>loadDisplacementWidget</zorder>
    <zorder>label_13</zorder>
    <zorder>currentFilePathLabel</zorder>
+   <zorder>heightWidthGaplengthLineEdit</zorder>
+   <zorder>heightWidthGaplengthLabel</zorder>
+   <zorder>convertToStressStrainButton</zorder>
+   <zorder>convertToLoadDisplacement</zorder>
+   <zorder>youngsModulusTextEdit</zorder>
+   <zorder>heightWidthGaplengthLabel_2</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1352</width>
+     <width>1192</width>
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="separator"/>
+   </widget>
+   <addaction name="menuFile"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QToolBar" name="toolBar">

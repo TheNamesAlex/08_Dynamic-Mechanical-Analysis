@@ -148,8 +148,7 @@ class MainWindow(QtWidgets.QMainWindow):
         return i, sep
 
     def update_data(self):
-
-        # we might encounter different headers in the file. This part searches for the first occurence in the
+        #we might encounter different headers in the file. This part searches for the first occurence in the
         #update current filepath label
         self.currentFilePathLabel.setText(self.filepath[self.filepath.rfind('/')+1:])
 
@@ -157,13 +156,12 @@ class MainWindow(QtWidgets.QMainWindow):
         self.names = ['Point', 'Time_Elapsed', 'Time_Scan', 'Displacement', 'Load', 'E11', 'E12', 'E22', 'Ax_cmd',
                       'Ax_err', 'No_Val']
 
-        header, sep = self.getheader_and_sep()
-
         self.data = pd.read_csv(self.filepath,
-                                header=header+1,
+                                header=2
+                                ,
                                 names=self.names,
-                                sep=sep,
-                                decimal=self.decimalSeparatorTextEdit.toPlainText())
+                                sep=','
+                                )
 
         # remove duplicate rows
         self.data = self.data.drop_duplicates(subset=['Time_Elapsed'], keep='first')

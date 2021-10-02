@@ -5,6 +5,7 @@ import pyqtgraph as pg
 import pygraph
 
 import sys
+import csv
 
 from PandasConvert import PandasModel
 import pandas as pd
@@ -34,6 +35,7 @@ class MainWindow(QtWidgets.QMainWindow):
         #TEXTINPUT INDICES
         self.startIndex.textChanged.connect(self.update_data)
         self.endIndex.textChanged.connect(self.update_data)
+        self.decimalSeparatorTextEdit.textChanged.connect(self.update_data)
 
         #INPUT SAVGOL
         self.savitzkyOrder.setValue(3)
@@ -60,7 +62,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.alsCheckbox.stateChanged.connect(self.update_data)
         self.alsLineEdit.textChanged.connect(self.update_data)
 
-        #connecting the button to select data
+        #connecting the button to select data, when clicked, clear all shown
+        self.selectData.clicked.connect(self.clear_plot)
         self.selectData.clicked.connect(self.fileSelect)
 
         #connecting the button to update data, and clean and redraw figures
@@ -127,8 +130,26 @@ class MainWindow(QtWidgets.QMainWindow):
         self.model = PandasModel(self.data)
         self.tableView.setModel(self.model)
 
+    def getheader_and_sep(self):
+        with open(self.filepath) as f:
+            reader = csv.reader(f, delimiter="\t")
+            for i, line in enumerate(reader):
+                sep=','
+                if len(line) > 0:
+                    if line[0].find(';') > 0:
+                        sep = ';'
+                    if line[0].find(',') > 0:
+                        sep = ','
+                    line = line[0].split(sep)
+                    if line[0] == 'Points':
+                        #print(i, sep)
+                        f.close()
+                        break
+        return i, sep
+
     def update_data(self):
 
+        # we might encounter different headers in the file. This part searches for the first occurence in the
         #update current filepath label
         self.currentFilePathLabel.setText(self.filepath[self.filepath.rfind('/')+1:])
 
@@ -136,7 +157,13 @@ class MainWindow(QtWidgets.QMainWindow):
         self.names = ['Point', 'Time_Elapsed', 'Time_Scan', 'Displacement', 'Load', 'E11', 'E12', 'E22', 'Ax_cmd',
                       'Ax_err', 'No_Val']
 
-        self.data = pd.read_csv(self.filepath, header=2, names=self.names)
+        header, sep = self.getheader_and_sep()
+
+        self.data = pd.read_csv(self.filepath,
+                                header=header+1,
+                                names=self.names,
+                                sep=sep,
+                                decimal=self.decimalSeparatorTextEdit.toPlainText())
 
         # remove duplicate rows
         self.data = self.data.drop_duplicates(subset=['Time_Elapsed'], keep='first')
@@ -203,6 +230,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.plot_data()
 
     def fileSelect(self):
+
         self.FLAG_stress_strain = False
         #init filepath
         self.filepath = ''

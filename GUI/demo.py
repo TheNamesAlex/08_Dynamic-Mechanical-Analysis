@@ -2,7 +2,6 @@ from PyQt5 import QtWidgets, uic, QtGui, QtCore
 
 from pyqtgraph import PlotWidget
 import pyqtgraph as pg
-import pygraph
 
 import sys
 import csv
@@ -21,6 +20,20 @@ class MainWindow(QtWidgets.QMainWindow):
     data_in_plot = False
     initial_load = True
     FLAG_stress_strain = False
+
+    calls = {'convertPlotToLoadDisplacement':0,
+             'convertPlotToStressStrain':0,
+             'calculate_regression_line_stress_strain':0,
+             'draw_regression_line':0,
+             'reset_indices':0,
+             'clear_plot':0,
+             'update_model':0,
+             'getheader_and_sep':0,
+             'update_data':0,
+             'fileSelect':0,
+             'plot_data':0,
+             'baseline_als':0
+             }
 
     def __init__(self, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)

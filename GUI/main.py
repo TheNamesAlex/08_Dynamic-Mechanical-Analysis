@@ -15,6 +15,19 @@ import numpy as np
 
 pg.setConfigOption('background', 'w')
 
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
+form = resource_path("UI.ui")
+Ui_MainWindow, QtBaseClass = uic.loadUiType(form)
+
 class MainWindow(QtWidgets.QMainWindow):
 
     data_in_plot = False
@@ -39,7 +52,9 @@ class MainWindow(QtWidgets.QMainWindow):
         super(MainWindow, self).__init__(*args, **kwargs)
 
         #Load the UI Page
-        uic.loadUi('main.ui', self)
+        form = resource_path("UI.ui")
+        #Ui_MainWindow, QtBaseClass = uic.loadUi(form)
+        uic.loadUi(form, self)
 
         #initialize  variables
         self.startIndex.setText('0')
